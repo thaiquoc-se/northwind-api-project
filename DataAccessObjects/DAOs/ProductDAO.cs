@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessObjects.DAOs
 {
-    public class ProductDAO : GenericDAO<ProductDAO, int>, IGenericDAO<ProductDAO, int>
+    public class ProductDAO : BaseDAO<Product, int>, IBaseDAO<Product, int>
     {
         public ProductDAO(NorthwindContext context) : base(context)
         {

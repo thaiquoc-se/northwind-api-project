@@ -1,3 +1,5 @@
+using API.Mapper;
+using AutoMapper;
 using DataAccessObjects;
 using Microsoft.EntityFrameworkCore;
 using Repositories.IRepository;
@@ -12,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped(typeof(IGenericDAO<,>), typeof(GenericDAO<,>));
+builder.Services.AddScoped(typeof(IBaseDAO<,>), typeof(BaseDAO<,>));
+builder.Services.AddAutoMapper(typeof(ProductMapper));
 builder.Services.AddDbContext<NorthwindContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Northwind"));

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IProductRepository : IGenericRepository<Product,int>
+    public interface IProductRepository : IBaseRepository<Product,int>
     {
     }
 }

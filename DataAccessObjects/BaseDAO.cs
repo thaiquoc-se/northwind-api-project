@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
-    public class GenericDAO<T, Tkey> : IGenericDAO<T, Tkey> where T : class
+    public class BaseDAO<T, Tkey> : IBaseDAO<T, Tkey> where T : class
     {
         private readonly NorthwindContext _context;
         private readonly DbSet<T> dbSet;
-        public GenericDAO(NorthwindContext context) 
+        public BaseDAO(NorthwindContext context) 
         {
             _context = context;
             dbSet = _context.Set<T>();
@@ -30,7 +30,13 @@ namespace DataAccessObjects
 
         public virtual IQueryable<T> Find(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] includes)
         {
-            throw new NotImplementedException();
+            var result = dbSet.Where(where);
+
+            foreach (var include in includes)
+            {
+                result = result.Include(include);
+            }
+            return result;
         }
 
         public virtual IQueryable<T> GetAll()
