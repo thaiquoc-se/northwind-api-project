@@ -16,11 +16,6 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped(typeof(IBaseDAO<,>), typeof(BaseDAO<,>));
 builder.Services.AddAutoMapper(typeof(ProductMapper));
-builder.Services.AddDbContext<NorthwindContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Northwind"));
-});
-
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

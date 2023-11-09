@@ -10,8 +10,6 @@ namespace DataAccessObjects.DAOs
 {
     public class ProductDAO : BaseDAO<Product, int>, IBaseDAO<Product, int>
     {
-        public ProductDAO(NorthwindContext context) : base(context)
-        {
-        }
+       
     }
 }

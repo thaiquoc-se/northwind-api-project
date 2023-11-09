@@ -18,8 +18,7 @@ namespace Repositories.Repository
         }
         public override IQueryable<Product> GetAll()
         {
-            return base.GetAll().Include(p => p.Category).Include(p => p.Supplier);
+            return base.GetAll().Include(p => p.Category).Include(p => p.Supplier).OrderByDescending(p => p.ProductId);
         }
-
     }
 }

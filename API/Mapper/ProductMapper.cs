@@ -1,4 +1,5 @@
 ﻿using API.DTOs;
+using API.ViewModels;
 using AutoMapper;
 using BusinessObjects.Models;
 
@@ -13,6 +14,8 @@ namespace API.Mapper
                                             .ForMember(dest => dest.SupplierName, opt => opt
                                             .MapFrom(src => src.Supplier!.CompanyName))
                                             .ReverseMap();
+
+            CreateMap<Product, ProductViewModel>().ReverseMap();
         }
     }
 }

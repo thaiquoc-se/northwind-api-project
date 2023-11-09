@@ -12,23 +12,23 @@ namespace DataAccessObjects
     {
         private readonly NorthwindContext _context;
         private readonly DbSet<T> dbSet;
-        public BaseDAO(NorthwindContext context) 
+        public BaseDAO() 
         {
-            _context = context;
+            _context = new NorthwindContext();
             dbSet = _context.Set<T>();
         }
 
-        public virtual async Task Add(T entity)
+        public async Task Add(T entity)
         {
             await dbSet.AddAsync(entity);
         }
 
-        public virtual IQueryable<T> Find(Expression<Func<T, bool>> expression)
+        public IQueryable<T> Find(Expression<Func<T, bool>> expression)
         {
             return dbSet.Where(expression);
         }
 
-        public virtual IQueryable<T> Find(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] includes)
+        public IQueryable<T> Find(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] includes)
         {
             var result = dbSet.Where(where);
 
@@ -39,17 +39,17 @@ namespace DataAccessObjects
             return result;
         }
 
-        public virtual IQueryable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
             return dbSet;
         }
 
-        public virtual async Task<T> GetByID(Tkey id)
+        public async Task<T> GetByID(Tkey id)
         {
             return await dbSet.FindAsync(id) ?? throw new Exception();
         }
 
-        public virtual async Task<bool> Remove(Tkey id)
+        public async Task<bool> Remove(Tkey id)
         {
             T? entity = await dbSet.FindAsync(id);
             if (entity == null)
